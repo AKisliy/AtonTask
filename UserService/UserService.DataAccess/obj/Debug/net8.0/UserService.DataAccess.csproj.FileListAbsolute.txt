@@ -1,0 +1,17 @@
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/bin/Debug/net8.0/UserService.DataAccess.deps.json
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/bin/Debug/net8.0/UserService.DataAccess.runtimeconfig.json
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/bin/Debug/net8.0/UserService.DataAccess.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/bin/Debug/net8.0/UserService.DataAccess.pdb
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.csproj.AssemblyReference.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.AssemblyInfoInputs.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.AssemblyInfo.cs
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.csproj.CoreCompileInputs.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.csproj.CopyComplete
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/refint/UserService.DataAccess.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.pdb
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/UserService.DataAccess.genruntimeconfig.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/obj/Debug/net8.0/ref/UserService.DataAccess.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/bin/Debug/net8.0/UserService.Core.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.DataAccess/bin/Debug/net8.0/UserService.Core.pdb

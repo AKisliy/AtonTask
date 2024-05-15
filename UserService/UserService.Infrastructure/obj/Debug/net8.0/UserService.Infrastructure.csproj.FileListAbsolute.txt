@@ -1,0 +1,15 @@
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/bin/Debug/net8.0/UserService.Infrastructure.deps.json
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/bin/Debug/net8.0/UserService.Infrastructure.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/bin/Debug/net8.0/UserService.Infrastructure.pdb
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/bin/Debug/net8.0/UserService.Core.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/bin/Debug/net8.0/UserService.Core.pdb
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.csproj.AssemblyReference.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.AssemblyInfoInputs.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.AssemblyInfo.cs
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.csproj.CopyComplete
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/refint/UserService.Infrastructure.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.pdb
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/ref/UserService.Infrastructure.dll

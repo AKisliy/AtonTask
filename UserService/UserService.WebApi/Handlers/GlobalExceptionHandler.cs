@@ -1,0 +1,39 @@
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using UserService.Core.Exceptions;
+using UserService.WebApi.Dto.Errors;
+
+namespace UserService.WebApi.Handlers
+{
+    public class GlobalExceptionHandler : IExceptionHandler
+    {
+        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext,Exception exception,CancellationToken cancellationToken)
+        {
+            var errorResponse = new ErrorResponse
+            {
+                Message = exception.Message,
+                Title = exception.GetType().Name
+            };
+            switch (exception)
+            {
+                case NotFoundException:
+                    errorResponse.StatusCode = (int)HttpStatusCode.NotFound;
+                    break;
+                case CredentialsException:
+                case ForbiddenException:
+                    errorResponse.StatusCode = (int)HttpStatusCode.Forbidden;
+                    break;
+                case ConflictException:
+                    errorResponse.StatusCode = (int)HttpStatusCode.Conflict;
+                    break;
+                default:
+                    errorResponse.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    errorResponse.Title = "Internal Server Error";
+                    break;
+            }
+            httpContext.Response.StatusCode = errorResponse.StatusCode;
+            await httpContext.Response.WriteAsJsonAsync(errorResponse, cancellationToken);
+            return true;
+        }
+    }
+}
