@@ -1,4 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +70,14 @@ namespace UserService.WebApi.Controllers
         {
             var revokerLogin = HttpContext.GetUserLogin();
             await _userService.DeleteUser(login, revokerLogin, hard);
+            return Ok();
+        }
+
+        [Authorize("Admin")]
+        [HttpPatch("recover/{login}")]
+        public async Task<IActionResult> RecoverUser(string login)
+        {
+            await _userService.RecoverUser(login);
             return Ok();
         }
     }

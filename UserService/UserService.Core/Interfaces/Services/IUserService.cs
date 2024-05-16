@@ -15,5 +15,7 @@ namespace UserService.Core.Interfaces.Services
         public IEnumerable<User> GetUsersOlderThan(int age);
 
         public Task DeleteUser(string login, string revokerLogin, bool hard);
+
+        public Task RecoverUser(string login);
     }
 }

@@ -10,7 +10,11 @@ namespace UserService.WebApi.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserEntity>().ReverseMap();
+            CreateMap<User, UserEntity>()
+                .ForMember(u => u.BirthDate, o => o.MapFrom(src => src.BirthDate.HasValue
+                                              ? DateTime.SpecifyKind(src.BirthDate.Value, DateTimeKind.Utc)
+                                              : (DateTime?)null));
+            CreateMap<UserEntity, User>();
             CreateMap<UserRegisterRequest, User>();
             CreateMap<User, UserResponse>();
             CreateMap<User, UserByLoginResponse>()

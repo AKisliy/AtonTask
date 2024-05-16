@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using UserService.Core.Exceptions;
@@ -61,6 +60,13 @@ namespace UserService.DataAccess.Repositories
                                     .Where(u => u.BirthDate <= minDate)
                                     .Select(u => _mapper.Map<User>(u));
             return users;
+        }
+
+        public async Task Update(User user)
+        {
+            var entity = _mapper.Map<UserEntity>(user);
+            _context.Users.Update(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteUser(string login, string revokerLogin, bool hard)

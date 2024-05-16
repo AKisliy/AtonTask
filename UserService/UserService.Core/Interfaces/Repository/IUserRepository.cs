@@ -16,6 +16,8 @@ namespace UserService.Core.Interfaces
 
         public Task DeleteUser(string login, string revokerLogin, bool hard);
 
+        public Task Update(User user);
+
         public Task<bool> HasUserWithLogin(string login);
     }
 }

@@ -61,5 +61,15 @@ namespace UserService.Application.Services
                 throw new NotFoundException($"No user with login {login}");
             await _userRepository.DeleteUser(login, revokerLogin, hard);
         }
+
+        public async Task RecoverUser(string login)
+        {
+            if(!await _userRepository.HasUserWithLogin(login))
+                throw new NotFoundException($"No user with login {login}");
+            var user = await _userRepository.GetUserByLogin(login);
+            user.RevokedOn = null;
+            user.RevokeBy = null;
+            await _userRepository.Update(user);
+        }
     }
 }
