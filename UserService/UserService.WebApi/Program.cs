@@ -7,6 +7,7 @@ using UserService.DataAccess;
 using UserService.DataAccess.Repositories;
 using UserService.Infrastructure;
 using UserService.Infrastructure.Options;
+using UserService.WebApi.Extensions;
 using UserService.WebApi.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+
+builder.Services.AddApiAuthentication(builder.Configuration);
 
 var app = builder.Build();
 

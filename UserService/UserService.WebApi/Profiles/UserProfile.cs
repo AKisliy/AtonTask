@@ -2,6 +2,7 @@ using AutoMapper;
 using UserService.Core.Models;
 using UserService.DataAccess;
 using UserService.WebApi.Dto.Request;
+using UserService.WebApi.Dto.Response;
 
 namespace UserService.WebApi.Profiles
 {
@@ -11,6 +12,9 @@ namespace UserService.WebApi.Profiles
         {
             CreateMap<User, UserEntity>().ReverseMap();
             CreateMap<UserRegisterRequest, User>();
+            CreateMap<User, UserResponse>();
+            CreateMap<User, UserByLoginResponse>()
+                .ForMember(u => u.IsActive, opt => opt.MapFrom(u => u.RevokedOn == null));
         }
     }
 }

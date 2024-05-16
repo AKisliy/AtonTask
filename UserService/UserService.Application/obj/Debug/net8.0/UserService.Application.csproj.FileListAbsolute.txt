@@ -13,3 +13,4 @@
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Application/obj/Debug/net8.0/refint/UserService.Application.dll
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Application/obj/Debug/net8.0/UserService.Application.pdb
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Application/obj/Debug/net8.0/ref/UserService.Application.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Application/obj/Debug/net8.0/UserService.Application.sourcelink.json

@@ -15,7 +15,7 @@ namespace UserService.Infrastructure
 
         public string GenerateToken(User user)
         {
-            Claim[] claims = [new("Id", user.Id.ToString()),new("IsAdmin", user.IsAdmin.ToString())];
+            Claim[] claims = [new("Id", user.Id.ToString()), new("Login", user.Login),new("IsAdmin", user.IsAdmin.ToString())];
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),
                 SecurityAlgorithms.HmacSha256

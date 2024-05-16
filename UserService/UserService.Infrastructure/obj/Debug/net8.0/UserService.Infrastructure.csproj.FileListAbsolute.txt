@@ -13,3 +13,4 @@
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/refint/UserService.Infrastructure.dll
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.pdb
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/ref/UserService.Infrastructure.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Infrastructure/obj/Debug/net8.0/UserService.Infrastructure.sourcelink.json

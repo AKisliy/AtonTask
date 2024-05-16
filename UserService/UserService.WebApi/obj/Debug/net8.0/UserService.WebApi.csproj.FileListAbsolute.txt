@@ -55,3 +55,4 @@
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/UserService.WebApi.pdb
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/UserService.WebApi.genruntimeconfig.cache
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/ref/UserService.WebApi.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/UserService.WebApi.sourcelink.json
