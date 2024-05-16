@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,15 @@ namespace UserService.WebApi.Controllers
         {
             var users = _userService.GetUsersOlderThan(age);
             return Ok(users.Select(u => _mapper.Map<UserResponse>(u)));
+        }
+
+        [Authorize("Admin")]
+        [HttpDelete("{login}")]
+        public async Task<IActionResult> DeleteUser(string login, bool hard)
+        {
+            var revokerLogin = HttpContext.GetUserLogin();
+            await _userService.DeleteUser(login, revokerLogin, hard);
+            return Ok();
         }
     }
 }

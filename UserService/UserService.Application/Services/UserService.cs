@@ -54,5 +54,12 @@ namespace UserService.Application.Services
                 throw new BadRequestException("Age can't be negative");
             return _userRepository.GetUsersOlderThan(age);
         }
+
+        public async Task DeleteUser(string login, string revokerLogin, bool hard)
+        {
+            if(!await _userRepository.HasUserWithLogin(login))
+                throw new NotFoundException($"No user with login {login}");
+            await _userRepository.DeleteUser(login, revokerLogin, hard);
+        }
     }
 }

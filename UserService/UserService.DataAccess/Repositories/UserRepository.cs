@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using UserService.Core.Exceptions;
@@ -60,6 +61,21 @@ namespace UserService.DataAccess.Repositories
                                     .Where(u => u.BirthDate <= minDate)
                                     .Select(u => _mapper.Map<User>(u));
             return users;
+        }
+
+        public async Task DeleteUser(string login, string revokerLogin, bool hard)
+        {
+            if(hard)
+            {
+                await _context.Users.Where(u => u.Login == login).ExecuteDeleteAsync();
+            }
+            else
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login) ?? throw new NotFoundException($"No user with login {login}");
+                user.RevokedOn = DateTime.UtcNow;
+                user.RevokedBy = revokerLogin;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
