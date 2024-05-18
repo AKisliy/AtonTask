@@ -22,6 +22,7 @@ namespace UserService.DataAccess.Repositories
             if(await HasUserWithLogin(user.Login))
                 throw new ConflictException("User with this login already exists");
             var entity = _mapper.Map<UserEntity>(user);
+            entity.CreatedOn = DateTime.UtcNow;
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity.Id;

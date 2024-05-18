@@ -17,5 +17,13 @@ namespace UserService.Core.Interfaces.Services
         public Task DeleteUser(string login, string revokerLogin, bool hard);
 
         public Task RecoverUser(string login);
+
+        public Task UpdateName(string login, string newName, string updaterLogin);
+
+        public Task UpdateGender(string login, int newGender, string updaterLogin);
+
+        public Task UpdateBirthday(string login, DateTime newBirthdate, string updaterLogin);
+
+        public Task UpdatePassword(string login, string newPassword, string updaterLogin);
     }
 }

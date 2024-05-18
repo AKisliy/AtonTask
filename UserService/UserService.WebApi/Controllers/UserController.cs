@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -78,6 +79,33 @@ namespace UserService.WebApi.Controllers
         public async Task<IActionResult> RecoverUser(string login)
         {
             await _userService.RecoverUser(login);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPatch("update/{login}/name")]
+        public async Task<IActionResult> UpdateName(string login, [Required] string newName)
+        {
+            var updaterLogin = HttpContext.GetUserLogin();
+            await _userService.UpdateName(login, newName, updaterLogin);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPatch("update/{login}/gender")]
+        public async Task<IActionResult> UpdateGender(string login, [Required] int newGender)
+        {
+            var updaterLogin = HttpContext.GetUserLogin();
+            await _userService.UpdateGender(login, newGender, updaterLogin);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPatch("update/{login}/birthday")]
+        public async Task<IActionResult> UpdateBirthday(string login, [Required] DateTime newBirthday)
+        {
+            var updaterLogin = HttpContext.GetUserLogin();
+            await _userService.UpdateBirthday(login, newBirthday, updaterLogin);
             return Ok();
         }
     }

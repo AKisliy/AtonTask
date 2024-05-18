@@ -71,5 +71,52 @@ namespace UserService.Application.Services
             user.RevokeBy = null;
             await _userRepository.Update(user);
         }
+
+        public async Task UpdateName(string login, string newName, string updaterLogin)
+        {
+            var user = await GetUserForUpdate(login, updaterLogin);
+            user.Name = newName;
+            await ProceedUpdate(user, updaterLogin);
+        }
+
+        public async Task UpdateGender(string login, int newGender, string updaterLogin)
+        {
+            if(newGender < 0 || newGender > 2)
+                throw new BadRequestException("Gender can be: 0 - female, 1 - male, 2 - unknown");
+            var user = await GetUserForUpdate(login, updaterLogin);
+            user.Gender = newGender;
+            await ProceedUpdate(user, updaterLogin);
+        }
+
+        public async Task UpdateBirthday(string login, DateTime newBirthdate, string updaterLogin)
+        {
+            var user = await GetUserForUpdate(login, updaterLogin);
+            user.BirthDate = newBirthdate;
+            await ProceedUpdate(user, updaterLogin);
+        }
+
+        public async Task UpdatePassword(string login, string newPassword, string updaterLogin)
+        {
+            var user = await GetUserForUpdate(login, updaterLogin);
+            user.Password = _hasher.Generate(newPassword);
+            await ProceedUpdate(user, updaterLogin);
+        }
+
+        private async Task<User> GetUserForUpdate(string login, string updaterLogin)
+        {
+            if(!await _userRepository.HasUserWithLogin(login))
+                throw new NotFoundException($"No user with login {login}");
+            var user = await _userRepository.GetUserByLogin(login);
+            if(updaterLogin == login && user.RevokedOn is not null)
+                throw new ForbiddenException($"User was revoked at {user.RevokedOn}");
+            return user;
+        }
+
+        private async Task ProceedUpdate(User user, string updaterLogin)
+        {
+            user.ModifiedOn = DateTime.UtcNow;
+            user.ModifiedBy = updaterLogin;
+            await _userRepository.Update(user);
+        }
     }
 }

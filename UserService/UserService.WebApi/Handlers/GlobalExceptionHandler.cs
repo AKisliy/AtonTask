@@ -16,6 +16,9 @@ namespace UserService.WebApi.Handlers
             };
             switch (exception)
             {
+                case BadRequestException:
+                    errorResponse.StatusCode = (int)HttpStatusCode.BadRequest;
+                    break;
                 case NotFoundException:
                     errorResponse.StatusCode = (int)HttpStatusCode.NotFound;
                     break;
