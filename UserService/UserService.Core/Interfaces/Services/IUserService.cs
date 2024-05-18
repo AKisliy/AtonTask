@@ -25,5 +25,7 @@ namespace UserService.Core.Interfaces.Services
         public Task UpdateBirthday(string login, DateTime newBirthdate, string updaterLogin);
 
         public Task UpdatePassword(string login, string newPassword, string updaterLogin);
+
+        public Task UpdateLogin(string login, string newLogin, string updaterLogin);
     }
 }

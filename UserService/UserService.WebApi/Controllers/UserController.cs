@@ -108,5 +108,23 @@ namespace UserService.WebApi.Controllers
             await _userService.UpdateBirthday(login, newBirthday, updaterLogin);
             return Ok();
         }
+
+        [Authorize]
+        [HttpPatch("update/{login}/password")]
+        public async Task<IActionResult> UpdatePassword(string login, [Required] string newPassword)
+        {
+            var updaterLogin = HttpContext.GetUserLogin();
+            await _userService.UpdatePassword(login, newPassword, updaterLogin);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPatch("update/{login}/login")]
+        public async Task<IActionResult> UpdateLogin(string login, [Required] string newLogin)
+        {
+            var updaterLogin = HttpContext.GetUserLogin();
+            await _userService.UpdateLogin(login, newLogin, updaterLogin);
+            return Ok();
+        }
     }
 }

@@ -102,6 +102,15 @@ namespace UserService.Application.Services
             await ProceedUpdate(user, updaterLogin);
         }
 
+        public async Task UpdateLogin(string login, string newLogin, string updaterLogin)
+        {
+            if(await _userRepository.HasUserWithLogin(newLogin))
+                throw new ConflictException($"User with login {newLogin} already exists");
+            var user = await GetUserForUpdate(login, updaterLogin);
+            user.Login = newLogin;
+            await ProceedUpdate(user, updaterLogin);
+        }
+
         private async Task<User> GetUserForUpdate(string login, string updaterLogin)
         {
             if(!await _userRepository.HasUserWithLogin(login))
