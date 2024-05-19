@@ -75,7 +75,7 @@ namespace UserService.WebApi.Controllers
         }
 
         [Authorize("Admin")]
-        [HttpPatch("recover/{login}")]
+        [HttpPatch("{login}/recover")]
         public async Task<IActionResult> RecoverUser(string login)
         {
             await _userService.RecoverUser(login);
@@ -83,7 +83,7 @@ namespace UserService.WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPatch("update/{login}/name")]
+        [HttpPatch("{login}/update/name")]
         public async Task<IActionResult> UpdateName(string login, [Required] string newName)
         {
             var updaterLogin = HttpContext.GetUserLogin();
@@ -92,7 +92,7 @@ namespace UserService.WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPatch("update/{login}/gender")]
+        [HttpPatch("{login}/update/gender")]
         public async Task<IActionResult> UpdateGender(string login, [Required] int newGender)
         {
             var updaterLogin = HttpContext.GetUserLogin();
@@ -101,7 +101,7 @@ namespace UserService.WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPatch("update/{login}/birthday")]
+        [HttpPatch("{login}/update/birthday")]
         public async Task<IActionResult> UpdateBirthday(string login, [Required] DateTime newBirthday)
         {
             var updaterLogin = HttpContext.GetUserLogin();
@@ -110,7 +110,7 @@ namespace UserService.WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPatch("update/{login}/password")]
+        [HttpPatch("{login}/update/password")]
         public async Task<IActionResult> UpdatePassword(string login, [Required] string newPassword)
         {
             var updaterLogin = HttpContext.GetUserLogin();
@@ -119,7 +119,7 @@ namespace UserService.WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPatch("update/{login}/login")]
+        [HttpPatch("{login}/update/login")]
         public async Task<IActionResult> UpdateLogin(string login, [Required] string newLogin)
         {
             var updaterLogin = HttpContext.GetUserLogin();

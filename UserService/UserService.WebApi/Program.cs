@@ -37,7 +37,7 @@ builder.Services.AddApiAuthentication(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("InDocker"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
