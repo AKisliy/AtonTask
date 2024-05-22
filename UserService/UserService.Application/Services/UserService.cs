@@ -10,22 +10,24 @@ namespace UserService.Application.Services
     {
         private IUserRepository _userRepository;
         private IPasswordHasher _hasher;
+        private IValidationHelper _validator;
 
-        public UsersService(IUserRepository userRepository, IPasswordHasher hasher)
+        public UsersService(IUserRepository userRepository, IPasswordHasher hasher, IValidationHelper validator)
         {
             _userRepository = userRepository;
             _hasher = hasher;
+            _validator = validator;
         }
 
-        public async Task<Guid> CreateUser(User user, string creator)
+        public async Task<string> CreateUser(User user, string creator)
         {
             var find = await _userRepository.HasUserWithLogin(user.Login);
             if(find)
                 throw new ConflictException("User with this email already exists");
             user.Password = _hasher.Generate(user.Password);
             user.CreatedBy = creator;
-            var id =  await _userRepository.CreateUser(user);
-            return id;
+            await _userRepository.CreateUser(user);
+            return user.Login;
         }
 
         public IEnumerable<User> GetActiveUsers()
@@ -74,6 +76,8 @@ namespace UserService.Application.Services
 
         public async Task UpdateName(string login, string newName, string updaterLogin)
         {
+            if(!_validator.ValidateName(newName))
+                throw new BadRequestException("New name can only contain Russian or latin letters");
             var user = await GetUserForUpdate(login, updaterLogin);
             user.Name = newName;
             await ProceedUpdate(user, updaterLogin);
@@ -97,6 +101,8 @@ namespace UserService.Application.Services
 
         public async Task UpdatePassword(string login, string newPassword, string updaterLogin)
         {
+            if(!_validator.ValidatePassword(newPassword))
+                throw new BadRequestException("New password can only contain latin letters or numbers");
             var user = await GetUserForUpdate(login, updaterLogin);
             user.Password = _hasher.Generate(newPassword);
             await ProceedUpdate(user, updaterLogin);
@@ -106,6 +112,8 @@ namespace UserService.Application.Services
         {
             if(await _userRepository.HasUserWithLogin(newLogin))
                 throw new ConflictException($"User with login {newLogin} already exists");
+            if(!_validator.ValidateLogin(newLogin))
+                throw new BadRequestException("New login can only contain latin letters or numbers");
             var user = await GetUserForUpdate(login, updaterLogin);
             user.Login = newLogin;
             await ProceedUpdate(user, updaterLogin);

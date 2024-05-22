@@ -28,8 +28,9 @@ namespace UserService.WebApi.Controllers
         public async Task<IActionResult> CreateUser(UserRegisterRequest request)
         {
             var creator = HttpContext.GetUserLogin();
-            var id = await _userService.CreateUser(_mapper.Map<User>(request), creator);
-            return Created($"api/user/{id}", new {UserId = id});
+            var login = await _userService.CreateUser(_mapper.Map<User>(request), creator);
+            var createdUser = await _userService.GetUserByLogin(login);
+            return Created($"api/user/{login}", _mapper.Map<UserResponse>(createdUser));
         }
 
         [Authorize("Admin")]
@@ -93,7 +94,7 @@ namespace UserService.WebApi.Controllers
 
         [Authorize]
         [HttpPatch("{login}/update/gender")]
-        public async Task<IActionResult> UpdateGender(string login, [Required] int newGender)
+        public async Task<IActionResult> UpdateGender(string login, [Required, Range(0, 2)] int newGender)
         {
             var updaterLogin = HttpContext.GetUserLogin();
             await _userService.UpdateGender(login, newGender, updaterLogin);

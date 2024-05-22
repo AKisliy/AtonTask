@@ -4,7 +4,7 @@ namespace UserService.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        public Task<Guid> CreateUser(User user, string creator);
+        public Task<string> CreateUser(User user, string creator);
 
         public IEnumerable<User> GetActiveUsers();
 

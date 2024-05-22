@@ -10,7 +10,7 @@ services:
       ASPNETCORE_URLS: "https://+;http://+"
       ASPNETCORE_HTTPS_PORT: "8081"
       ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/UserService.WebApi.pfx"
-      ASPNETCORE_Kestrel__Certificates__Default__Password: ${BEBRA}
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ${ASPNETCORE_Kestrel__Certificates__Default__Password}
     depends_on:
       aton-db:
         condition: service_healthy
@@ -20,8 +20,8 @@ services:
     env_file:
       - ./Config/.env
     environment:
-      POSTGRES_USER: "alexeykiselev"
-      POSTGRES_PASSWORD: "kisliy"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "10432:5432"
     healthcheck:
