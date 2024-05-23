@@ -6,18 +6,11 @@ using UserService.Core.Models;
 
 namespace UserService.Application.Services
 {
-    public class UsersService: IUserService
+    public class UsersService(IUserRepository userRepository, IPasswordHasher hasher, IValidationHelper validator) : IUserService
     {
-        private IUserRepository _userRepository;
-        private IPasswordHasher _hasher;
-        private IValidationHelper _validator;
-
-        public UsersService(IUserRepository userRepository, IPasswordHasher hasher, IValidationHelper validator)
-        {
-            _userRepository = userRepository;
-            _hasher = hasher;
-            _validator = validator;
-        }
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IPasswordHasher _hasher = hasher;
+        private readonly IValidationHelper _validator = validator;
 
         public async Task<string> CreateUser(User user, string creator)
         {

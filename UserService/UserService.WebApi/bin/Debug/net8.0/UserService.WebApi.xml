@@ -60,7 +60,6 @@
             <response code="200">Success</response>
             <response code="400">Invalid data was provided</response>
             <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
-            <response code="404">User wasn't found</response>
             <response code="500">Server problems :(</response>
         </member>
         <member name="M:UserService.WebApi.Controllers.UserController.DeleteUser(System.String,System.Boolean)">
@@ -86,7 +85,7 @@
         </member>
         <member name="M:UserService.WebApi.Controllers.UserController.UpdateName(System.String,System.String)">
             <summary>
-            Update user's name (admin or user)
+            Update user's name (for admin or user)
             </summary>
             <param name="login">The login of user, whose name will be changed</param>
             <param name="newName">New name of user. Should only contain Russian or Latin letters.</param>
@@ -99,7 +98,7 @@
         </member>
         <member name="M:UserService.WebApi.Controllers.UserController.UpdateGender(System.String,System.Int32)">
             <summary>
-            Update user's gender (admin or user)
+            Update user's gender (for admin or user)
             </summary>
             <param name="login">The login of user, whose gender will be changed</param>
             <param name="newGender">New gender of user. Should be: 0 - female, 1 - male, 2 - unknown.</param>
@@ -112,7 +111,7 @@
         </member>
         <member name="M:UserService.WebApi.Controllers.UserController.UpdateBirthday(System.String,System.DateTime)">
             <summary>
-            Update user's birthday (admin or user)
+            Update user's birthday (for admin or user)
             </summary>
             <param name="login">The login of user, whose birthday will be changed</param>
             <param name="newBirthday">New birthday of user.</param>

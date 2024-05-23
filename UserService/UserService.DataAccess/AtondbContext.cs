@@ -34,7 +34,6 @@ public class AtondbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("created_by");
             entity.Property(e => e.CreatedOn)
-                //.HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnName("created_on");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)

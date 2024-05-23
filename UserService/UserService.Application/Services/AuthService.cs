@@ -14,7 +14,7 @@ namespace UserService.Application.Services
         public async Task<string> Login(string login, string password)
         {
             var user = await _userRepository.GetUserByLogin(login) ?? throw new NotFoundException($"No user with login: {login}");
-            if(user.RevokedOn != null)
+            if(user.RevokedOn is not null)
                 throw new ForbiddenException($"User {login} was revoked at {user.RevokedOn}");
             var result = _hasher.Verify(password, user.Password);
             if(!result)

@@ -6,16 +6,10 @@ using UserService.Core.Models;
 
 namespace UserService.DataAccess.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository(AtondbContext context, IMapper mapper) : IUserRepository
     {
-        private readonly AtondbContext _context;
-        private readonly IMapper _mapper;
-
-        public UserRepository(AtondbContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        private readonly AtondbContext _context = context;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<Guid> CreateUser(User user)
         {

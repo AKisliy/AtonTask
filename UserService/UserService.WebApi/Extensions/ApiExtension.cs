@@ -1,6 +1,12 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using UserService.Application.Services;
+using UserService.Core.Interfaces;
+using UserService.Core.Interfaces.Infrastructure;
+using UserService.Core.Interfaces.Services;
+using UserService.DataAccess.Repositories;
+using UserService.Infrastructure;
 using UserService.Infrastructure.Options;
 
 namespace UserService.WebApi.Extensions
@@ -38,10 +44,32 @@ namespace UserService.WebApi.Extensions
                         }
                     };
                 });
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Admin", policy => policy.RequireClaim("IsAdmin", "True"));
-            });
+            services.AddAuthorizationBuilder()
+                .AddPolicy("Admin", policy => policy.RequireClaim("IsAdmin", "True"));
+        }
+
+        public static void ConfigureCustomOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+            services.Configure<MyCookiesOptions>(configuration.GetSection(nameof(MyCookiesOptions)));
+        }
+
+        public static void AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UsersService>();
+        }
+
+        public static void AddInfrastructure(this IServiceCollection services)
+        {
+            services.AddScoped<IJwtProvider, JwtProvider>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IValidationHelper, ValidationHelper>();
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

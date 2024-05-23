@@ -12,16 +12,10 @@ namespace UserService.WebApi.Controllers
 {
     [ApiController]
     [Route("api/user")]
-    public class UserController : ControllerBase
+    public class UserController(IUserService userService, IMapper mapper) : ControllerBase
     {
-        private readonly IUserService _userService;
-        private readonly IMapper _mapper;
-
-        public UserController(IUserService userService, IMapper mapper)
-        {
-            _userService = userService;
-            _mapper = mapper;
-        }
+        private readonly IUserService _userService = userService;
+        private readonly IMapper _mapper = mapper;
 
         /// <summary>
         /// Create new user (only for admin)
@@ -95,7 +89,6 @@ namespace UserService.WebApi.Controllers
         /// <response code="200">Success</response>
         /// <response code="400">Invalid data was provided</response>
         /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
-        /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
         [HttpGet("all/{age}")]
