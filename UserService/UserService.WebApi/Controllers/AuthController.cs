@@ -15,9 +15,20 @@ namespace UserService.WebApi.Controllers
         private readonly IAuthService _authService = authService;
         private readonly MyCookiesOptions _cookiesOptions = cookiesOptions.Value;
 
+
+        /// <summary>
+        /// Login with user's login and password (JWT token is used)
+        /// </summary>
+        /// <param name="user">Body with login and password</param>
+        /// <response code="200">Success</response>
+        /// <response code="404">User with Login not found</response>
+        /// <response code="403">Incorrect password or user was revoked</response>
+        /// <response code="500">Server problems :(</response>
         [HttpPost("login")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType<ErrorResponse>((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType<ErrorResponse>((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType<ErrorResponse>((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Login(UserLoginRequest user)
         {
             var token = await _authService.Login(user.Login, user.Password);

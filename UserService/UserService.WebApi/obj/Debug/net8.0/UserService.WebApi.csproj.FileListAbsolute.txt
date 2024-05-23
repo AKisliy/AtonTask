@@ -57,3 +57,5 @@
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/ref/UserService.WebApi.dll
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/UserService.WebApi.sourcelink.json
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/bin/Debug/net8.0/appsettings.InDocker.json
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/bin/Debug/net8.0/UserService.WebApi.xml
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.WebApi/obj/Debug/net8.0/UserService.WebApi.xml
