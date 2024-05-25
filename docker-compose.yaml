@@ -1,0 +1,31 @@
+services:
+  webapi:
+    image: akisliy/aton-userservice:1.0
+    ports:
+      - "8080:80"
+      - "8081:443"
+    env_file:
+      - ./Config/.env
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "8081"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/UserService.WebApi.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ${ASPNETCORE_Kestrel__Certificates__Default__Password}
+    depends_on:
+      aton-db:
+        condition: service_healthy
+
+  aton-db:
+    image: akisliy/aton-db:1.0
+    env_file:
+      - ./Config/.env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "10432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alexeykiselev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

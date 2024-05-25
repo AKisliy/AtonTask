@@ -9,3 +9,4 @@
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Core/obj/Debug/net8.0/refint/UserService.Core.dll
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Core/obj/Debug/net8.0/UserService.Core.pdb
 /Users/alexeykiselev/dev/Aton-task/UserService/UserService.Core/obj/Debug/net8.0/ref/UserService.Core.dll
+/Users/alexeykiselev/dev/Aton-task/UserService/UserService.Core/obj/Debug/net8.0/UserService.Core.sourcelink.json
