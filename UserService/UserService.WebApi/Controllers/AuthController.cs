@@ -15,9 +15,8 @@ namespace UserService.WebApi.Controllers
         private readonly IAuthService _authService = authService;
         private readonly MyCookiesOptions _cookiesOptions = cookiesOptions.Value;
 
-
         /// <summary>
-        /// Login with user's login and password (JWT token is used)
+        /// Login with user's login and password (JWT is used)
         /// </summary>
         /// <param name="user">Body with login and password</param>
         /// <response code="200">Success</response>

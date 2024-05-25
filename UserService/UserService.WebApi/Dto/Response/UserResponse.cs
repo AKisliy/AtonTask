@@ -6,6 +6,6 @@ namespace UserService.WebApi.Dto.Response
 
         public int Gender { get; set; }
 
-        public DateTime? BirthDate { get; set; }
+        public DateOnly? BirthDate { get; set; }
     }
 }

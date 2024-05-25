@@ -23,9 +23,15 @@ namespace UserService.WebApi.Profiles
                 .ForMember(u => u.CreatedOn, o => o.MapFrom(src => DateTime.SpecifyKind(src.CreatedOn, DateTimeKind.Utc)));
             CreateMap<UserEntity, User>();
             CreateMap<UserRegisterRequest, User>();
-            CreateMap<User, UserResponse>();
+            CreateMap<User, UserResponse>()
+                .ForMember(u => u.BirthDate, o => o.MapFrom(src => src.BirthDate.HasValue 
+                                              ? DateOnly.FromDateTime(src.BirthDate.Value)
+                                              : (DateOnly?)null));
             CreateMap<User, UserByLoginResponse>()
-                .ForMember(u => u.IsActive, opt => opt.MapFrom(u => u.RevokedOn == null));
+                .ForMember(u => u.IsActive, opt => opt.MapFrom(u => u.RevokedOn == null))
+                .ForMember(u => u.BirthDate, o => o.MapFrom(src => src.BirthDate.HasValue 
+                                              ? DateOnly.FromDateTime(src.BirthDate.Value)
+                                              : (DateOnly?)null));
         }
     }
 }

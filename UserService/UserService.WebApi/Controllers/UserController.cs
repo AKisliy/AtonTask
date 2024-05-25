@@ -22,8 +22,9 @@ namespace UserService.WebApi.Controllers
         /// </summary>
         /// <param name="request">Body with login, password, name and isAdmin fields</param>
         /// <response code="201">User created</response>
-        /// <response code="400">Some fields have invalid data or problems with token</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="400">Some fields have invalid data</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
+        /// <response code="403">This endpoint is only for Admins</response>
         /// <response code="409">User with this login already exists</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
@@ -40,7 +41,8 @@ namespace UserService.WebApi.Controllers
         /// Get all active users (only for admin)
         /// </summary>
         /// <response code="200">Success</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint only for admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
+        /// <response code="403">This endpoint is only for Admins</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
         [HttpGet("all/active")]
@@ -55,7 +57,8 @@ namespace UserService.WebApi.Controllers
         /// </summary>
         /// <param name="login">Login of user to get info</param>
         /// <response code="200">Success</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
+        /// <response code="403">This endpoint is only for Admins</response>
         /// <response code="404">User with login wasn't found</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
@@ -88,7 +91,8 @@ namespace UserService.WebApi.Controllers
         /// <param name="age">The age to compare with</param>
         /// <response code="200">Success</response>
         /// <response code="400">Invalid data was provided</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
+        /// <response code="403">This endpoint is only for Admins</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
         [HttpGet("all/{age}")]
@@ -104,7 +108,8 @@ namespace UserService.WebApi.Controllers
         /// <param name="login">The login of user to delete</param>
         /// <param name="hard">Is deletion hard? (True if hard, false if soft)</param>,s
         /// <response code="200">Success</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
+        /// <response code="403">This endpoint is only for Admins</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
@@ -121,7 +126,8 @@ namespace UserService.WebApi.Controllers
         /// </summary>
         /// <param name="login">The login of user to recover</param>
         /// <response code="200">Success</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
+        /// <response code="403">This endpoint is only for Admins</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
         [Authorize("Admin")]
@@ -139,7 +145,7 @@ namespace UserService.WebApi.Controllers
         /// <param name="newName">New name of user. Should only contain Russian or Latin letters.</param>
         /// <response code="200">Success</response>
         /// <response code="400">Some data is invalid</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
         /// <response code="403">User was revoked and can't perform this action</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
@@ -159,7 +165,7 @@ namespace UserService.WebApi.Controllers
         /// <param name="newGender">New gender of user. Should be: 0 - female, 1 - male, 2 - unknown.</param>
         /// <response code="200">Success</response>
         /// <response code="400">Some data is invalid</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
         /// <response code="403">User was revoked and can't perform this action</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
@@ -176,19 +182,20 @@ namespace UserService.WebApi.Controllers
         /// Update user's birthday (for admin or user)
         /// </summary>
         /// <param name="login">The login of user, whose birthday will be changed</param>
-        /// <param name="newBirthday">New birthday of user.</param>
+        /// <param name="newBirthday">New birthday of user (format: yyyy-mm-dd)</param>
         /// <response code="200">Success</response>
         /// <response code="400">Some data is invalid</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
         /// <response code="403">User was revoked and can't perform this action</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
         [Authorize]
         [HttpPatch("{login}/update/birthday")]
-        public async Task<IActionResult> UpdateBirthday(string login, [Required] DateTime newBirthday)
+        public async Task<IActionResult> UpdateBirthday(string login, [Required] DateOnly newBirthday)
         {
             var updaterLogin = HttpContext.GetUserLogin();
-            await _userService.UpdateBirthday(login, newBirthday, updaterLogin);
+            DateTime newBirthdayDate = newBirthday.ToDateTime(new TimeOnly(0,0));
+            await _userService.UpdateBirthday(login, newBirthdayDate, updaterLogin);
             return Ok();
         }
 
@@ -199,7 +206,7 @@ namespace UserService.WebApi.Controllers
         /// <param name="newPassword">New password of user. Should only contain numbers and/or latin letters.</param>
         /// <response code="200">Success</response>
         /// <response code="400">Some data is invalid</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
         /// <response code="403">User was revoked and can't perform this action</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
@@ -219,7 +226,7 @@ namespace UserService.WebApi.Controllers
         /// <param name="newLogin">New login of user. Should only contain numbers and/or latin letters.</param>
         /// <response code="200">Success</response>
         /// <response code="400">Some data is invalid</response>
-        /// <response code="401">User can't perform this action (maybe token is expired or this endpoint is only for Admins)</response>
+        /// <response code="401">User can't perform this action (maybe token is expired)</response>
         /// <response code="403">User was revoked and can't perform this action</response>
         /// <response code="404">User wasn't found</response>
         /// <response code="500">Server problems :(</response>
