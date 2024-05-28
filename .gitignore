@@ -1,4 +1,2 @@
-/UserService/UserService.WebApi/*.json
-/UserService/UserService.WebApi/appsettings.json
+/UserService/UserService.WebApi/appsettings.InDocker.json
 /UserService/Certs
-/UserService/UserService.WebApi/Dockerfile
